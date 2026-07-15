@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b1730" />
+  <title>Triad Trainers — Local Pokémon GO Community</title>
+  <meta name="description" content="Triad Trainers is a fan-made Pokémon GO community hub for Winston-Salem, Greensboro, High Point, and the Piedmont Triad." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Inter:wght@400;500;600;700;800&family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="bootScreen" class="boot-screen">
+    <div class="boot-orb">
+      <div class="boot-line"></div>
+      <div class="boot-button"></div>
+    </div>
+    <div class="boot-copy">
+      <span>TRIAD TRAINER NETWORK</span>
+      <h1>Initializing PokéNav...</h1>
+      <div class="boot-progress"><i></i></div>
+      <small>Connecting Winston-Salem • Greensboro • High Point</small>
+    </div>
+  </div>
+
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a href="#home" class="brand">
+        <span class="brand-ball"><i></i></span>
+        <span><strong>Triad Trainers</strong><small>TRAINER NETWORK</small></span>
+      </a>
+
+      <div class="trainer-mini">
+        <div class="trainer-avatar">JT</div>
+        <div>
+          <strong>Welcome, Trainer</strong>
+          <small>Triad Region • Level 42</small>
+        </div>
+        <span class="online-dot"></span>
+      </div>
+
+      <nav>
+        <a class="active" href="#home"><span>⌂</span> PokéNav</a>
+        <a href="#lab"><span>⚗</span> Professor's Lab</a>
+        <a href="#raids"><span>◉</span> Raid Lobby</a>
+        <a href="#schedule"><span>▦</span> Adventure Schedule</a>
+        <a href="#shiny"><span>✦</span> Shiny Sightings</a>
+        <a href="#hundo"><span>100</span> Hundo Radar</a>
+        <a href="#trade"><span>⇄</span> Trade Corner</a>
+        <a href="#routes"><span>⌖</span> Route Finder</a>
+        <a href="#wayfarer"><span>◇</span> Wayfarer Workshop</a>
+        <a href="#lounge"><span>☵</span> GO Lounge</a>
+      </nav>
+
+      <div class="sidebar-card">
+        <span class="eyebrow">NEXT MEETUP</span>
+        <strong>Raid Hour Train</strong>
+        <small>Wednesday • 6:00 PM</small>
+        <button>Check in</button>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <button class="menu-button" id="menuButton">☰</button>
+        <div class="top-status">
+          <span class="weather-orb">☀</span>
+          <div><strong>Triad Region</strong><small>Clear weather • Normal boost</small></div>
+        </div>
+        <div class="top-actions">
+          <button class="round-button">⌕</button>
+          <button class="round-button">♢</button>
+          <button class="campfire-button">Open Campfire</button>
+        </div>
+      </header>
+
+      <section id="home" class="hero panel">
+        <div class="hero-grid"></div>
+        <div class="hero-content">
+          <span class="eyebrow yellow">LOCAL TRAINER NETWORK</span>
+          <h1>Welcome back,<br><em>Trainer.</em></h1>
+          <p>The Triad is active. Check local raids, meetups, community reports, and everything happening across Winston-Salem, Greensboro, and High Point.</p>
+          <div class="hero-buttons">
+            <a class="primary-button" href="#raids">Enter Raid Lobby</a>
+            <a class="secondary-button" href="#schedule">View Adventure Schedule</a>
+          </div>
+        </div>
+
+        <div class="hero-device">
+          <div class="device-header">
+            <div class="device-lights"><i></i><i></i><i></i></div>
+            <span>POKÉNAV ONLINE</span>
+          </div>
+          <div class="radar">
+            <div class="radar-ring r1"></div>
+            <div class="radar-ring r2"></div>
+            <div class="radar-ring r3"></div>
+            <div class="radar-sweep"></div>
+            <span class="radar-ping p1"></span>
+            <span class="radar-ping p2"></span>
+            <span class="radar-ping p3"></span>
+            <div class="radar-center">TT</div>
+          </div>
+          <div class="device-footer">
+            <div><strong>12</strong><small>TRAINERS</small></div>
+            <div><strong>4</strong><small>RAIDS</small></div>
+            <div><strong>3</strong><small>EVENTS</small></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="stat-strip">
+        <article><span class="stat-icon yellow-bg">⚡</span><div><small>TRAINERS ONLINE</small><strong>24</strong></div><b>+6 today</b></article>
+        <article><span class="stat-icon blue-bg">◉</span><div><small>ACTIVE RAIDS</small><strong>4</strong></div><b>2 forming</b></article>
+        <article><span class="stat-icon purple-bg">✦</span><div><small>SHINY REPORTS</small><strong>17</strong></div><b>this week</b></article>
+        <article><span class="stat-icon red-bg">100</span><div><small>HUNDO REPORTS</small><strong>3</strong></div><b>verified</b></article>
+      </section>
+
+      <section class="content-grid">
+        <article id="schedule" class="panel schedule-panel">
+          <div class="section-head">
+            <div><span class="eyebrow">ADVENTURE SCHEDULE</span><h2>What's happening</h2></div>
+            <button class="text-button">Full calendar →</button>
+          </div>
+          <div class="event-list">
+            <div class="event-row featured-event">
+              <div class="date-chip"><strong>WED</strong><span>6 PM</span></div>
+              <div class="event-symbol yellow-bg">⚡</div>
+              <div><span class="pill yellow-pill">RAID HOUR</span><h3>Legendary Raid Train</h3><p>Downtown Winston-Salem • Meet at the first gym</p></div>
+              <button class="join-button">Join</button>
+            </div>
+            <div class="event-row">
+              <div class="date-chip"><strong>SAT</strong><span>2 PM</span></div>
+              <div class="event-symbol blue-bg">✦</div>
+              <div><span class="pill blue-pill">COMMUNITY DAY</span><h3>Triad Community Meetup</h3><p>Group walk, trades, lures, and shiny checks</p></div>
+              <button class="join-button">Join</button>
+            </div>
+            <div class="event-row">
+              <div class="date-chip"><strong>SUN</strong><span>1 PM</span></div>
+              <div class="event-symbol purple-bg">M</div>
+              <div><span class="pill purple-pill">MAX BATTLES</span><h3>Power Spot Meetup</h3><p>Team setup posted inside Campfire</p></div>
+              <button class="join-button">Join</button>
+            </div>
+          </div>
+        </article>
+
+        <article id="lab" class="panel lab-panel">
+          <div class="section-head">
+            <div><span class="eyebrow">PROFESSOR'S LAB</span><h2>Today's field notes</h2></div>
+            <span class="lab-light"></span>
+          </div>
+          <div class="professor-card">
+            <div class="professor-orb">W</div>
+            <div>
+              <strong>Trainer briefing</strong>
+              <p>Several local raid groups are forming this evening. Check the Raid Lobby before heading out.</p>
+            </div>
+          </div>
+          <div class="research-grid">
+            <div><span>01</span><strong>Catch task</strong><small>Catch 25 Pokémon</small><i style="width:72%"></i></div>
+            <div><span>02</span><strong>Raid task</strong><small>Win 2 raids</small><i style="width:50%"></i></div>
+            <div><span>03</span><strong>Explore task</strong><small>Walk 3 km</small><i style="width:88%"></i></div>
+          </div>
+        </article>
+
+        <article id="raids" class="panel raid-panel">
+          <div class="section-head">
+            <div><span class="eyebrow">RAID LOBBY</span><h2>Groups forming now</h2></div>
+            <span class="live-badge"><i></i> LIVE</span>
+          </div>
+          <div class="raid-list">
+            <div class="raid-item">
+              <div class="raid-egg five-star">5★</div>
+              <div class="raid-main"><strong>Legendary Raid</strong><span>Hatches in 18 minutes</span><div class="trainer-stack"><i>JT</i><i>KM</i><i>AR</i><i>+3</i></div></div>
+              <div class="raid-location">📍 Downtown</div>
+              <button>Join Lobby</button>
+            </div>
+            <div class="raid-item">
+              <div class="raid-egg mega">M</div>
+              <div class="raid-main"><strong>Mega Raid</strong><span>Starts in 31 minutes</span><div class="trainer-stack"><i>SK</i><i>DL</i><i>+2</i></div></div>
+              <div class="raid-location">📍 Hanes Park</div>
+              <button>Join Lobby</button>
+            </div>
+            <div class="raid-item">
+              <div class="raid-egg shadow">S</div>
+              <div class="raid-main"><strong>Shadow Raid</strong><span>In-person team needed</span><div class="trainer-stack"><i>MB</i><i>+1</i></div></div>
+              <div class="raid-location">📍 Greensboro</div>
+              <button>Join Lobby</button>
+            </div>
+          </div>
+        </article>
+
+        <article id="shiny" class="panel shiny-panel">
+          <div class="section-head">
+            <div><span class="eyebrow">SHINY SIGHTINGS</span><h2>Lucky catches</h2></div>
+            <button class="text-button">Post catch +</button>
+          </div>
+          <div class="shiny-grid">
+            <div class="catch-card gold-card"><span class="sparkles">✦</span><div class="silhouette">⚡</div><strong>Electric-type</strong><small>Caught near Salem Lake</small></div>
+            <div class="catch-card blue-card"><span class="sparkles">✦</span><div class="silhouette">◉</div><strong>Water-type</strong><small>Community meetup</small></div>
+            <div class="catch-card purple-card"><span class="sparkles">✦</span><div class="silhouette">☾</div><strong>Ghost-type</strong><small>Downtown spawn</small></div>
+          </div>
+        </article>
+
+        <article id="hundo" class="panel hundo-panel">
+          <div class="section-head">
+            <div><span class="eyebrow">HUNDO RADAR</span><h2>Verified reports</h2></div>
+            <div class="radar-status">SCANNING</div>
+          </div>
+          <div class="hundo-display">
+            <div class="hundo-circle"><span>100</span><small>IV</small></div>
+            <div>
+              <strong>Latest verified report</strong>
+              <h3>Normal-type spawn</h3>
+              <p>Reported near a local park. Always follow posted rules and verify safely.</p>
+              <div class="despawn"><span>Estimated despawn</span><strong id="countdown">18:42</strong></div>
+            </div>
+          </div>
+        </article>
+
+        <article id="trade" class="panel trade-panel">
+          <div class="section-head">
+            <div><span class="eyebrow">TRADE CORNER</span><h2>Local trade board</h2></div>
+            <button class="text-button">Create post +</button>
+          </div>
+          <div class="trade-row"><div class="trade-avatar">A</div><div><strong>Looking for regional trades</strong><span>Offering older event Pokémon</span></div><span class="trade-tag">OPEN</span></div>
+          <div class="trade-row"><div class="trade-avatar">K</div><div><strong>Lucky trade available</strong><span>Winston-Salem meetup preferred</span></div><span class="trade-tag blue-pill">LUCKY</span></div>
+          <div class="trade-row"><div class="trade-avatar">M</div><div><strong>Mirror trade session</strong><span>Saving candy and rerolling IVs</span></div><span class="trade-tag purple-pill">MIRROR</span></div>
+        </article>
+      </section>
+
+      <section class="feature-grid">
+        <article id="routes" class="feature-card route-card"><span>⌖</span><h3>Route Finder</h3><p>Discover walking loops, meetup parks, and community-tested routes.</p><button>Explore routes →</button></article>
+        <article id="wayfarer" class="feature-card wayfarer-card"><span>◇</span><h3>Wayfarer Workshop</h3><p>Coordinate nominations and improve the local game map together.</p><button>Open workshop →</button></article>
+        <article id="lounge" class="feature-card lounge-card"><span>☵</span><h3>GO Lounge</h3><p>Chat, share tips, post catches, and stay connected between events.</p><button>Enter lounge →</button></article>
+      </section>
+
+      <section class="join-banner">
+        <div>
+          <span class="eyebrow yellow">TRIAD TRAINERS</span>
+          <h2>The adventure is better together.</h2>
+          <p>Join the local trainer network and help build the strongest Pokémon GO community in the Piedmont Triad.</p>
+        </div>
+        <button>Join through Campfire</button>
+      </section>
+
+      <footer>
+        <strong>Triad Trainers</strong>
+        <span>Independent fan community. Not affiliated with Niantic, Nintendo, or The Pokémon Company.</span>
+      </footer>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
