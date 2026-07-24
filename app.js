@@ -53,6 +53,7 @@ function createRaidCard({ id, boss, location, endTimestamp, joinCount = 0 }) {
 
   const raidItem = document.createElement("div");
   raidItem.className = "raid-item";
+  raidItem.dataset.raidId = id;
 
   raidItem.innerHTML = `
     <div class="raid-egg five-star">★</div>
@@ -137,6 +138,33 @@ async function displaySavedRaids() {
 }
 
 displaySavedRaids();
+supabaseClient
+  .channel("raid-updates")
+  .on(
+    "postgres_changes",
+    {
+      event: "UPDATE",
+      schema: "public",
+      table: "Raids"
+    },
+    payload => {
+      const updatedRaid = payload.new;
+      const raidCard = document.querySelector(
+        `.raid-item[data-raid-id="${updatedRaid.id}"]`
+      );
+
+      if (!raidCard) return;
+
+      const joinCountDisplay = raidCard.querySelector(".raid-join-count");
+
+      if (joinCountDisplay) {
+        joinCountDisplay.textContent =
+          `👥 ${updatedRaid.Join_count ?? 0} joined`;
+      }
+    }
+  )
+  .subscribe();
+
 if (hostRaidButton && raidForm) {
   hostRaidButton.addEventListener("click", () => {
     raidForm.hidden = !raidForm.hidden;
