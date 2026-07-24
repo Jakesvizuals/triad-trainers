@@ -28,23 +28,27 @@ async function loadRaidsFromSupabase() {
 }
 
 async function saveRaidToSupabase({ boss, location, endTimestamp }) {
-  const { error } = await supabaseClient
+  const { data, error } = await supabaseClient
     .from("Raids")
     .insert({
-  Boss: boss,
-  location,
-  end_timestamp: new Date(endTimestamp).toISOString()
-});
+      Boss: boss,
+      location: location,
+      end_timestamp: new Date(endTimestamp).toISOString(),
+      Join_count: 0
+    })
+    .select()
+    .single();
 
   if (error) {
-  console.error("Could not save raid:", error);
-  alert(`Supabase error: ${error.message}`);
-  return false;
+    console.error("Could not save raid:", error);
+    alert(`Supabase error: ${error.message}`);
+    return null;
+  }
+
+  return data;
 }
 
-  return true;
-}
-function createRaidCard({ boss, location, endTimestamp }) {
+function createRaidCard({ id, boss, location, endTimestamp, joinCount = 0 }) {
   if (!raidList || endTimestamp <= Date.now()) return;
 
   const raidItem = document.createElement("div");
@@ -57,6 +61,7 @@ function createRaidCard({ boss, location, endTimestamp }) {
       <span class="raid-timer">Calculating time...</span>
     </div>
     <div class="raid-location">📍 ${location}</div>
+    <div class="raid-join-count">👥 ${joinCount} joined</div>
     <button class="join-raid-button">Join Lobby</button>
   `;
 
@@ -64,7 +69,7 @@ function createRaidCard({ boss, location, endTimestamp }) {
 
   const timer = raidItem.querySelector(".raid-timer");
   const joinButton = raidItem.querySelector(".join-raid-button");
-
+  const joinCountDisplay = raidItem.querySelector(".raid-join-count");
   function updateRaidTimer() {
     const remaining = endTimestamp - Date.now();
 
@@ -92,10 +97,28 @@ function createRaidCard({ boss, location, endTimestamp }) {
     updateRaidTimer();
   }, 1000);
 
-  joinButton.addEventListener("click", () => {
-    joinButton.textContent = "Joined ✓";
-    joinButton.disabled = true;
-  });
+  joinButton.addEventListener("click", async () => {
+  if (!id) return;
+
+  joinButton.disabled = true;
+
+  const { data, error } = await supabaseClient.rpc(
+    "increment_raid_join_count",
+    { raid_id: id }
+  );
+
+  if (error) {
+    console.error("Could not join raid:", error);
+    alert(`Supabase error: ${error.message}`);
+    joinButton.disabled = false;
+    return;
+  }
+
+  joinCount = data;
+  joinCountDisplay.textContent = `👥 ${joinCount} joined`;
+
+  joinButton.textContent = "Joined ✓";
+});
 }
 async function displaySavedRaids() {
   const raids = await loadRaidsFromSupabase();
@@ -104,10 +127,12 @@ async function displaySavedRaids() {
     .filter(raid => new Date(raid.end_timestamp).getTime() > Date.now())
     .forEach(raid => {
       createRaidCard({
-        boss: raid.Boss,
-        location: raid.location,
-        endTimestamp: new Date(raid.end_timestamp).getTime()
-      });
+  id: raid.id,
+  boss: raid.Boss,
+  location: raid.location,
+  endTimestamp: new Date(raid.end_timestamp).getTime(),
+  joinCount: raid.Join_count ?? 0
+});
     });
 }
 
@@ -148,9 +173,11 @@ if (!saved) {
 }
 
 createRaidCard({
-  boss,
-  location,
-  endTimestamp
+  id: saved.id,
+  boss: saved.Boss,
+  location: saved.location,
+  endTimestamp: new Date(saved.end_timestamp).getTime(),
+  joinCount: saved.Join_count ?? 0
 });
 
   
