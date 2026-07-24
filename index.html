@@ -162,36 +162,27 @@
             <div><span>01</span><strong>Catch task</strong><small>Catch 25 Pokémon</small><i style="width:72%"></i></div>
             <div><span>02</span><strong>Raid task</strong><small>Win 2 raids</small><i style="width:50%"></i></div>
             <div><span>03</span><strong>Explore task</strong><small>Walk 3 km</small><i style="width:88%"></i></div>
-          </div>
-        </article>
+            </div>    
+          </article>
 
         <article id="raids" class="panel raid-panel">
           <div class="section-head">
-            <div><span class="eyebrow">RAID LOBBY</span><h2>Groups forming now</h2></div>
-            <span class="live-badge"><i></i> LIVE</span>
+            <div>
+              <span class="eyebrow">RAID LOBBY</span>
+              <h2>Groups forming now</h2>
+            </div>
+            <button id="hostRaidButton" class="text-button">Host Raid +</button>
           </div>
-          <div class="raid-list">
-            <div class="raid-item">
-              <div class="raid-egg five-star">5★</div>
-              <div class="raid-main"><strong>Legendary Raid</strong><span>Hatches in 18 minutes</span><div class="trainer-stack"><i>JT</i><i>KM</i><i>AR</i><i>+3</i></div></div>
-              <div class="raid-location">📍 Downtown</div>
-              <button>Join Lobby</button>
-            </div>
-            <div class="raid-item">
-              <div class="raid-egg mega">M</div>
-              <div class="raid-main"><strong>Mega Raid</strong><span>Starts in 31 minutes</span><div class="trainer-stack"><i>SK</i><i>DL</i><i>+2</i></div></div>
-              <div class="raid-location">📍 Hanes Park</div>
-              <button>Join Lobby</button>
-            </div>
-            <div class="raid-item">
-              <div class="raid-egg shadow">S</div>
-              <div class="raid-main"><strong>Shadow Raid</strong><span>In-person team needed</span><div class="trainer-stack"><i>MB</i><i>+1</i></div></div>
-              <div class="raid-location">📍 Greensboro</div>
-              <button>Join Lobby</button>
-            </div>
-          </div>
-        </article>
 
+          <div id="raidForm" hidden>
+            <input id="raidBoss" type="text" placeholder="Raid boss">
+            <input id="raidLocation" type="text" placeholder="Gym or location">
+            <input id="raidEndTime" type="datetime-local">
+            <button id="submitRaidButton">Post Raid</button>
+          </div>
+
+          <div class="raid-list"></div>
+        </article>    
         <article id="shiny" class="panel shiny-panel">
           <div class="section-head">
             <div><span class="eyebrow">SHINY SIGHTINGS</span><h2>Lucky catches</h2></div>
@@ -252,7 +243,7 @@
       </footer>
     </main>
   </div>
-
-  <script src="app.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+ <script src="app.js?v=2"></script>
 </body>
 </html>
