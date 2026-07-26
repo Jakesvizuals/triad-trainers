@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Inter:wght@400;500;600;700;800&family=Press+Start+2P&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=4">
 </head>
 <body>
   <div id="bootScreen" class="boot-screen">
@@ -35,14 +35,19 @@
       <div class="trainer-mini">
         <div class="trainer-avatar">JT</div>
         <div>
-          <strong>Welcome, Trainer</strong>
-          <small>Triad Region • Level 42</small>
+          <strong id="trainerLabel">Welcome, Trainer</strong>
+          <small id="trainerMeta">Triad Region • Level 42</small>
         </div>
-        <span class="online-dot"></span>
+        <div class="trainer-status">
+          <span class="owner-badge" id="ownerBadge" hidden>OWNER</span>
+          <span class="online-dot"></span>
+        </div>
       </div>
 
       <nav>
         <a class="active" href="#home"><span>⌂</span> PokéNav</a>
+        <a id="communitySafetyLink" href="#community-safety"><span>🛡</span> Community Safety</a>
+        <a id="adminBackstageLink" href="#admin-backstage" hidden><span>⚙</span> Admin Backstage</a>
         <a href="#lab"><span>⚗</span> Professor's Lab</a>
         <a href="#raids"><span>◉</span> Raid Lobby</a>
         <a href="#schedule"><span>▦</span> Adventure Schedule</a>
@@ -59,6 +64,11 @@
         <strong>Raid Hour Train</strong>
         <small>Wednesday • 6:00 PM</small>
         <button>Check in</button>
+        <div class="online-roster">
+          <span class="eyebrow">ONLINE TRAINERS</span>
+          <strong id="onlineCount">0 online</strong>
+          <ul id="onlineTrainerList" class="online-trainer-list"></ul>
+        </div>
       </div>
     </aside>
 
@@ -72,9 +82,136 @@
         <div class="top-actions">
           <button class="round-button">⌕</button>
           <button class="round-button">♢</button>
+          <button class="secondary-button" id="editSiteButton" hidden>Edit Site</button>
           <button class="campfire-button">Open Campfire</button>
         </div>
       </header>
+      <div id="editorToolbar" class="editor-toolbar" hidden>
+        <label>Background <input id="backgroundColorPicker" type="color" value="#07131f"></label>
+        <button id="saveLayoutButton" class="secondary-button">Save layout</button>
+        <span>Drag tiles to reorder them.</span>
+      </div>
+      <section id="authPanel" class="panel auth-banner">
+        <div class="auth-banner-grid">
+          <div class="auth-banner-copy">
+            <span class="eyebrow yellow">TRAINER ACCESS</span>
+            <h2>Trainer Login</h2>
+            <p class="auth-banner-text">Sign in to keep your trainer profile synced with the Triad network.</p>
+          </div>
+
+          <div class="auth-form-stack">
+            <div class="auth-input-row">
+              <input id="authEmail" class="auth-input" type="email" placeholder="Email">
+              <input id="authPassword" class="auth-input" type="password" placeholder="Password">
+            </div>
+            <input id="playerCode" class="auth-input" type="text" placeholder="Trainer code (optional)">
+
+            <div class="auth-verify-grid">
+              <label class="auth-field">
+                <span>Age verification</span>
+                <select id="ageVerification" class="auth-input">
+                  <option value="">Select</option>
+                  <option value="adult">I am 18 or older</option>
+                  <option value="minor">I am under 18</option>
+                </select>
+              </label>
+              <label class="auth-field">
+                <span>Default lounge access</span>
+                <select id="chatAccess" class="auth-input">
+                  <option value="general">General GO Lounge</option>
+                  <option value="adult">Adults-only lounge</option>
+                  <option value="kid">Kid-safe lounge</option>
+                </select>
+              </label>
+            </div>
+
+            <label class="auth-checkbox">
+              <input id="termsAccepted" type="checkbox">
+              <span>I agree to the safety rules, moderation standards, and privacy notice.</span>
+            </label>
+
+            <div class="auth-actions">
+              <button id="signUpButton" class="secondary-button auth-secondary">Create Account</button>
+              <button id="signInButton" class="primary-button auth-primary">Sign In</button>
+              <button id="signOutButton" class="secondary-button auth-secondary" hidden>Sign Out</button>
+            </div>
+
+            <p id="authStatus" class="auth-status">Not signed in</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="safetyPage" class="panel safety-panel" hidden>
+        <div class="section-head">
+          <div>
+            <span class="eyebrow yellow">COMMUNITY SAFETY</span>
+            <h2>GO Lounge moderation and access controls</h2>
+          </div>
+        </div>
+
+        <div class="safety-grid">
+          <article class="safety-card">
+            <h3>Age-based chat routing</h3>
+            <ul>
+              <li>Adults are routed into adults-only rooms.</li>
+              <li>Underage users are routed into kid-safe rooms.</li>
+              <li>General social chat remains available for verified community members.</li>
+            </ul>
+          </article>
+
+          <article class="safety-card">
+            <h3>Automated moderation</h3>
+            <ul>
+              <li>Filters scan for profanity, hate speech, racial slurs, and vulgar content.</li>
+              <li>Flagged content is logged, recorded, and sent to admin review.</li>
+              <li>Repeat offenders can be warned, muted, or removed.</li>
+            </ul>
+          </article>
+
+          <article class="safety-card legal-card">
+            <h3>Community terms, safety rules, and privacy notice</h3>
+            <p>This community framework is designed to support safe Pokémon GO trainer conversations, protect minors, and give admins the tools to enforce policies. It is an original safety policy template for the site and should be reviewed by qualified counsel before launch in your jurisdiction.</p>
+            <ul>
+              <li>Users must follow the site rules and treat others with respect.</li>
+              <li>Harassment, hate speech, racism, slurs, and explicit content are not tolerated.</li>
+              <li>Admins may remove users, mute accounts, and review reports when needed.</li>
+              <li>Records of content review and moderation actions may be retained for safety and compliance purposes.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section id="adminPage" class="panel safety-panel" hidden>
+        <div class="section-head">
+          <div>
+            <span class="eyebrow yellow">ADMIN BACKSTAGE</span>
+            <h2>Moderation tools and reports</h2>
+          </div>
+        </div>
+
+        <article class="safety-card admin-card">
+          <h3>Admin backstage</h3>
+          <div class="admin-actions">
+            <button id="reviewReportsButton" class="secondary-button">Review reports</button>
+            <button id="removeUserButton" class="secondary-button">Remove from chat</button>
+            <button id="warnUserButton" class="secondary-button">Warn user</button>
+            <button id="adminEditLayoutButton" class="secondary-button" hidden>Edit layout</button>
+          </div>
+          <div class="admin-overview">
+            <div class="overview-pill"><strong id="reportCount">0</strong><span>Reports</span></div>
+            <div class="overview-pill"><strong id="warningCount">0</strong><span>Warnings</span></div>
+            <div class="overview-pill"><strong id="blockedCount">0</strong><span>Blocked</span></div>
+          </div>
+          <div class="admin-addons">
+            <h4>Add an admin</h4>
+            <div class="admin-add-form">
+              <input id="newAdminEmail" type="email" placeholder="Email address">
+              <button id="addAdminButton" class="secondary-button">Add admin</button>
+            </div>
+          </div>
+          <div class="report-list"></div>
+        </article>
+      </section>
 
       <section id="home" class="hero panel">
         <div class="hero-grid"></div>
@@ -112,58 +249,54 @@
       </section>
 
       <section class="stat-strip">
-        <article><span class="stat-icon yellow-bg">⚡</span><div><small>TRAINERS ONLINE</small><strong>24</strong></div><b>+6 today</b></article>
+        <article><span class="stat-icon yellow-bg">⚡</span><div><small>TRAINERS ONLINE</small><strong id="onlineCount">0</strong></div><b>live roster</b></article>
         <article><span class="stat-icon blue-bg">◉</span><div><small>ACTIVE RAIDS</small><strong>4</strong></div><b>2 forming</b></article>
         <article><span class="stat-icon purple-bg">✦</span><div><small>SHINY REPORTS</small><strong>17</strong></div><b>this week</b></article>
         <article><span class="stat-icon red-bg">100</span><div><small>HUNDO REPORTS</small><strong>3</strong></div><b>verified</b></article>
       </section>
 
       <section class="content-grid">
-        <article id="schedule" class="panel schedule-panel">
+        <article id="schedule" class="panel schedule-panel" data-editable="true">
           <div class="section-head">
             <div><span class="eyebrow">ADVENTURE SCHEDULE</span><h2>What's happening</h2></div>
-            <button class="text-button">Full calendar →</button>
+            <button id="scheduleCalendarButton" class="text-button">Full calendar →</button>
           </div>
-          <div class="event-list">
-            <div class="event-row featured-event">
-              <div class="date-chip"><strong>WED</strong><span>6 PM</span></div>
-              <div class="event-symbol yellow-bg">⚡</div>
-              <div><span class="pill yellow-pill">RAID HOUR</span><h3>Legendary Raid Train</h3><p>Downtown Winston-Salem • Meet at the first gym</p></div>
-              <button class="join-button">Join</button>
-            </div>
-            <div class="event-row">
-              <div class="date-chip"><strong>SAT</strong><span>2 PM</span></div>
-              <div class="event-symbol blue-bg">✦</div>
-              <div><span class="pill blue-pill">COMMUNITY DAY</span><h3>Triad Community Meetup</h3><p>Group walk, trades, lures, and shiny checks</p></div>
-              <button class="join-button">Join</button>
-            </div>
-            <div class="event-row">
-              <div class="date-chip"><strong>SUN</strong><span>1 PM</span></div>
-              <div class="event-symbol purple-bg">M</div>
-              <div><span class="pill purple-pill">MAX BATTLES</span><h3>Power Spot Meetup</h3><p>Team setup posted inside Campfire</p></div>
-              <button class="join-button">Join</button>
-            </div>
+          <div class="composer-card">
+            <input id="scheduleTitle" type="text" placeholder="Event title">
+            <input id="scheduleLocation" type="text" placeholder="Location">
+            <input id="scheduleTime" type="datetime-local">
+            <input id="scheduleInvite" type="text" placeholder="Invite link or meeting point">
+            <select id="scheduleType">
+              <option value="raid">Raid</option>
+              <option value="community">Community Meetup</option>
+              <option value="remote">Remote Raid</option>
+            </select>
+            <button id="postScheduleButton">Post event</button>
           </div>
+          <div class="section-head schedule-calendar-head">
+            <div><span class="eyebrow">ADVENTURE CALENDAR</span><h3>Upcoming events</h3></div>
+            <button id="scheduleCalendarButton" class="text-button">Show calendar</button>
+          </div>
+          <div id="calendarPanel" class="calendar-panel" hidden>
+            <div id="calendarList" class="calendar-list"></div>
+          </div>
+          <div id="scheduleList" class="event-list"></div>
         </article>
 
-        <article id="lab" class="panel lab-panel">
+        <article id="lab" class="panel lab-panel" data-editable="true">
           <div class="section-head">
-            <div><span class="eyebrow">PROFESSOR'S LAB</span><h2>Today's field notes</h2></div>
+            <div><span class="eyebrow">PROFESSOR'S LAB</span><h2>Upcoming GO events</h2></div>
             <span class="lab-light"></span>
           </div>
           <div class="professor-card">
             <div class="professor-orb">W</div>
             <div>
               <strong>Trainer briefing</strong>
-              <p>Several local raid groups are forming this evening. Check the Raid Lobby before heading out.</p>
+              <p>Fresh event notes from Pokémon GO Hub and LeekDuck are gathered here for trainers planning their next outing.</p>
             </div>
           </div>
-          <div class="research-grid">
-            <div><span>01</span><strong>Catch task</strong><small>Catch 25 Pokémon</small><i style="width:72%"></i></div>
-            <div><span>02</span><strong>Raid task</strong><small>Win 2 raids</small><i style="width:50%"></i></div>
-            <div><span>03</span><strong>Explore task</strong><small>Walk 3 km</small><i style="width:88%"></i></div>
-            </div>    
-          </article>
+          <div id="labFeed" class="research-grid"></div>
+        </article>
 
         <article id="raids" class="panel raid-panel">
           <div class="section-head">
@@ -177,48 +310,53 @@
           <div id="raidForm" hidden>
             <input id="raidBoss" type="text" placeholder="Raid boss">
             <input id="raidLocation" type="text" placeholder="Gym or location">
+            <input id="raidStartTime" type="datetime-local">
             <input id="raidEndTime" type="datetime-local">
             <button id="submitRaidButton">Post Raid</button>
           </div>
 
           <div class="raid-list"></div>
         </article>    
-        <article id="shiny" class="panel shiny-panel">
+        <article id="shiny" class="panel shiny-panel" data-editable="true">
           <div class="section-head">
             <div><span class="eyebrow">SHINY SIGHTINGS</span><h2>Lucky catches</h2></div>
-            <button class="text-button">Post catch +</button>
+            <button id="postShinyButton" class="text-button">Post catch +</button>
           </div>
-          <div class="shiny-grid">
-            <div class="catch-card gold-card"><span class="sparkles">✦</span><div class="silhouette">⚡</div><strong>Electric-type</strong><small>Caught near Salem Lake</small></div>
-            <div class="catch-card blue-card"><span class="sparkles">✦</span><div class="silhouette">◉</div><strong>Water-type</strong><small>Community meetup</small></div>
-            <div class="catch-card purple-card"><span class="sparkles">✦</span><div class="silhouette">☾</div><strong>Ghost-type</strong><small>Downtown spawn</small></div>
+          <div id="shinyComposer" class="composer-card" hidden>
+            <input id="shinyName" type="text" placeholder="Pokémon caught">
+            <input id="shinyLocation" type="text" placeholder="Where you caught it">
+            <textarea id="shinyNote" placeholder="Short note"></textarea>
+            <input id="shinyImage" type="file" accept="image/*">
+            <button id="submitShinyButton">Share catch</button>
           </div>
+          <div id="shinyGrid" class="shiny-grid"></div>
         </article>
 
-        <article id="hundo" class="panel hundo-panel">
+        <article id="hundo" class="panel hundo-panel" data-editable="true">
           <div class="section-head">
-            <div><span class="eyebrow">HUNDO RADAR</span><h2>Verified reports</h2></div>
-            <div class="radar-status">SCANNING</div>
+            <div><span class="eyebrow">HUNDO RADAR</span><h2>Player reports</h2></div>
+            <button id="postHundoButton" class="text-button">Report hundo +</button>
           </div>
-          <div class="hundo-display">
-            <div class="hundo-circle"><span>100</span><small>IV</small></div>
-            <div>
-              <strong>Latest verified report</strong>
-              <h3>Normal-type spawn</h3>
-              <p>Reported near a local park. Always follow posted rules and verify safely.</p>
-              <div class="despawn"><span>Estimated despawn</span><strong id="countdown">18:42</strong></div>
-            </div>
+          <div id="hundoComposer" class="composer-card" hidden>
+            <input id="hundoPokemon" type="text" placeholder="Pokémon seen">
+            <input id="hundoLocation" type="text" placeholder="Location found">
+            <textarea id="hundoNote" placeholder="Details and nearby tips"></textarea>
+            <button id="submitHundoButton">Post report</button>
           </div>
+          <div id="hundoReports" class="hundo-list"></div>
         </article>
 
-        <article id="trade" class="panel trade-panel">
+        <article id="trade" class="panel trade-panel" data-editable="true">
           <div class="section-head">
             <div><span class="eyebrow">TRADE CORNER</span><h2>Local trade board</h2></div>
-            <button class="text-button">Create post +</button>
+            <button id="postTradeButton" class="text-button">Create post +</button>
           </div>
-          <div class="trade-row"><div class="trade-avatar">A</div><div><strong>Looking for regional trades</strong><span>Offering older event Pokémon</span></div><span class="trade-tag">OPEN</span></div>
-          <div class="trade-row"><div class="trade-avatar">K</div><div><strong>Lucky trade available</strong><span>Winston-Salem meetup preferred</span></div><span class="trade-tag blue-pill">LUCKY</span></div>
-          <div class="trade-row"><div class="trade-avatar">M</div><div><strong>Mirror trade session</strong><span>Saving candy and rerolling IVs</span></div><span class="trade-tag purple-pill">MIRROR</span></div>
+          <div id="tradeComposer" class="composer-card" hidden>
+            <input id="tradeTitle" type="text" placeholder="What you want to trade">
+            <textarea id="tradeNote" placeholder="Offer details and preferred meetup"></textarea>
+            <button id="submitTradeButton">Post trade</button>
+          </div>
+          <div id="tradeList" class="trade-list"></div>
         </article>
       </section>
 
@@ -244,6 +382,6 @@
     </main>
   </div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
- <script src="app.js?v=2"></script>
+ <script src="app.js?v=3"></script>
 </body>
 </html>
